@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import useFetchRepos from './useFetchRepos'
 import Repos from './components/Repos'
+import RepoPagination from './components/RepoPagination'
 import Container from 'react-bootstrap/Container'
 import Spinner from 'react-bootstrap/Spinner'
-import Button from 'react-bootstrap/Button';
+
 // import Card from '@material-ui/core/Card';
 
 /* Home component */
@@ -20,8 +21,8 @@ export default function App() {
   const { sortKey, repos, stars, lang, loading, error } = useFetchRepos(params, page)
   return (
     <div>
+      <RepoPagination page={page} setPage={setPage} />
       <Container>
-      <Button variant="primary">Primary</Button>
         {loading && <Spinner animation="grow" />}
         {error && <h1>Error try refreshing again ...</h1>}
         {repos.map((repo, index) => {
